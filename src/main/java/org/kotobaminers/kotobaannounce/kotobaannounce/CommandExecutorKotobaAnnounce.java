@@ -21,19 +21,22 @@ public class CommandExecutorKotobaAnnounce implements CommandExecutor {
 	public boolean onCommand(CommandSender sender, Command command, String label,String[] args) {
 		if(sender instanceof Player) {
 			Player player = (Player) sender;
-			Commands commands = Commands.lookup(label);
-			switch(commands) {
-			case ANNOUNCE:
-				return true;
-			case KOTOBAANNOUNCE:
-				return true;
-			case NONE:
-				break;
-			default:
-				break;
+			if(player.isOp()) {
+				Commands commands = Commands.lookup(label);
+				switch(commands) {
+				case ANNOUNCE:
+					new CommandKotobaAnnounce().runCommand(player, command, args);
+					return true;
+				case KOTOBAANNOUNCE:
+					new CommandKotobaAnnounce().runCommand(player, command, args);
+					return true;
+				case NONE:
+					break;
+				default:
+					break;
+				}
 			}
 		}
 		return false;
 	}
-
 }

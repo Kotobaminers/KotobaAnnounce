@@ -13,38 +13,49 @@ public class CommandKotobaAnnounce extends MyCommand {
 			}
 		}
 	}
-
 	@Override
 	public boolean runCommand(Player player, Command command, String[] args) {
 		Utilities.prindDebug("", new Exception());
-		Commands commands = Commands.lookup(command.getName());
-		switch(commands) {
-		case INTERVAL:
-			runInterval();
-			return true;
-		case RELOAD:
-			runReload();
-			return true;
-		case TOGGLE:
-			runToggle();
-			return true;
-		case NONE:
-			break;
-		default:
-			break;
+		if(0 < args.length) {
+			Commands commands = Commands.lookup(args[0]);
+			switch(commands) {
+			case INTERVAL:
+				if(1 < args.length) {
+					commandInterval(args[1]);
+					return true;
+				}
+			case RELOAD:
+				commandReload();
+				return true;
+			case TOGGLE:
+				commandToggle(player);
+				return true;
+			case NONE:
+				break;
+			default:
+				break;
+			}
 		}
 		return false;
 	}
-
-	private void runToggle() {
+	private void commandToggle(Player player) {
 		Utilities.prindDebug("", new Exception());
+		Config.reverseToggle();
+		Config.printToggle(player);
 	}
-
-	private void runReload() {
+	private void commandReload() {
 		Utilities.prindDebug("", new Exception());
+		StaticFields.initialize(StaticFields.plugin);
 	}
-
-	private void runInterval() {
+	private void commandInterval(String arg) {
 		Utilities.prindDebug("", new Exception());
+		Integer interval = 100;
+		try{
+			interval = Integer.valueOf(arg);
+		} catch(NumberFormatException e) {
+			Utilities.prindDebug(e.toString(), new Exception());
+			return;
+		}
+		Config.saveInterval(interval);
 	}
 }
