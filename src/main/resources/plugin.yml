@@ -1,4 +1,4 @@
 name: KotobaAnnounce
-main:org.kotobaminers.kotobaannounce.kotobaannounce.KotobaAnnounce
-version: 0.1
+main: org.kotobaminers.kotobaannounce.kotobaannounce.KotobaAnnounce
+version: 0.0.1
 commands:
