@@ -1,5 +1,7 @@
 package org.kotobaminers.kotobaannounce.kotobaannounce;
 
+import java.io.File;
+
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
 
@@ -10,9 +12,9 @@ public class KotobaAnnounce extends JavaPlugin {
 	public void onEnable() {
 		System.out.println("Enabling KotobaAnnounce");
 		saveConfig();
-		
 		updateScheduler();
 
+		Announcer.reloadMessages(this);
 	}
 
 	private void updateScheduler() {
