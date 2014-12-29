@@ -14,7 +14,7 @@ public class KotobaAnnounce extends JavaPlugin {
                 // Do something
             	Scheduler.run();
             }
-        }, 200L, 20L); // Waiting 10sec before first run, then run every sec
+        }, 200L, 200L); // Waiting 10sec before first run, then run every 10sec
         
 	}
 
