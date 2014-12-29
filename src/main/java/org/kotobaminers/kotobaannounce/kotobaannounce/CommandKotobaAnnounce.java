@@ -4,7 +4,7 @@ import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
 
 public class CommandKotobaAnnounce extends MyCommand {
-	public enum Commands {NONE, RELOAD, INTERVAL, TOGGLE;
+	public enum Commands {NONE, RELOAD, INTERVAL, TOGGLE, DEBUG;
 		public static Commands lookup(String name) {
 			try {
 				return Commands.valueOf(name.toUpperCase());
@@ -29,6 +29,9 @@ public class CommandKotobaAnnounce extends MyCommand {
 				return true;
 			case TOGGLE:
 				commandToggle(player);
+				return true;
+			case DEBUG:
+				Utilities.toggleDebug();
 				return true;
 			case NONE:
 				break;
