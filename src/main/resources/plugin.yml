@@ -1,4 +1,12 @@
 name: KotobaAnnounce
 main: org.kotobaminers.kotobaannounce.kotobaannounce.KotobaAnnounce
+<<<<<<< HEAD
 version: 0.0.1
 commands:
+=======
+version: 0.1
+commands:
+  NONE:
+  KOTOBAANNOUNCE:
+  ANNOUNCE:
+>>>>>>> Adding_Command
