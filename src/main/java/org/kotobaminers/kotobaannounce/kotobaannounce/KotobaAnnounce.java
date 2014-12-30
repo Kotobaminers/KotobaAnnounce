@@ -18,9 +18,9 @@ public class KotobaAnnounce extends JavaPlugin {
 		}
 
 		saveConfig();
-
 		updateScheduler();
 
+		Announcer.reloadMessages(this);
 	}
 
 	private void updateScheduler() {
