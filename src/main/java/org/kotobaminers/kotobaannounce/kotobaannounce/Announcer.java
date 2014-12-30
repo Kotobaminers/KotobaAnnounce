@@ -14,19 +14,21 @@ import org.bukkit.entity.Player;
 public final class Announcer {
     private final KotobaAnnounce plugin;
     static List<String> messages;
-
+    private static int index;
+    
     public Announcer(KotobaAnnounce plugin) {
         this.plugin = plugin;
     }
 
 
 	public static void announce() {
-		// TODO Auto-generated method stub
 		String message = getNextMessage();
-		long checksum = getChecksum(message);
 
 		//TODO: if(debug) Bukkit.getLogger().info(message);
-		
+
+		if(message == null) return;
+		long checksum = getChecksum(message);
+
 	    for (Player player : Bukkit.getServer().getOnlinePlayers()) {
 	    	if(!hasIgnored(checksum, player))
 	    		player.sendMessage(parseMessage(message, player));
@@ -35,8 +37,14 @@ public final class Announcer {
 	}
 
 	private static String getNextMessage() {
-		// TODO Get next message
-		return "This is a &4test &fmessage for <playername>";
+		if(messages.isEmpty()) return null;
+		
+		if(index >= messages.size()-1)
+			index = 0;
+		else
+			index++;
+		
+		return messages.get(index);
 	}
 	
 	private static String parseMessage(String message, Player player) {
@@ -64,8 +72,15 @@ public final class Announcer {
 		if (messagesFile == null) {
 	        messagesFile = new File(kotobaAnnounce.getDataFolder(), "messages.yml");
 	    }
+	    if (!messagesFile.exists()) {            
+	    	kotobaAnnounce.saveResource("messages.yml", false);
+	     }
+	    
 		Configuration messagesConfig = YamlConfiguration.loadConfiguration(messagesFile);
 		messages = messagesConfig.getStringList("messages");
+		for(String s : messages) {
+			System.out.println("Announce message loaded: " + s);
+		}
 	}
 
 }
