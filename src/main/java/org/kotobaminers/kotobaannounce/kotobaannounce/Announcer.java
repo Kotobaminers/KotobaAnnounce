@@ -30,7 +30,7 @@ public final class Announcer {
 		long checksum = getChecksum(message);
 
 	    for (Player player : Bukkit.getServer().getOnlinePlayers()) {
-	    	if(!hasIgnored(checksum, player))
+	    	if(!hasIgnored(player, checksum))
 	    		player.sendMessage(parseMessage(message, player));
 	    }
 		return;
@@ -53,10 +53,11 @@ public final class Announcer {
 		return message;
 	}
 
-	private static boolean hasIgnored(long checksum, Player player) {
+	private static boolean hasIgnored(Player player, long checksum) {
 		//TODO: check has player ignored message or disabled all messages
 		//player.getUniqueId().toString()
 		//Long.toString(checksum)
+		System.out.println("hasIgnored( " + player.getUniqueId().toString() + ", " + Long.toString(checksum) + " )");
 		return false;
 	}
 
