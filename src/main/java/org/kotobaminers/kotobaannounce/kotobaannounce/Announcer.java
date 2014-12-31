@@ -36,6 +36,10 @@ public final class Announcer {
 		return;
 	}
 
+	/**
+	 * Get next plain message
+	 * @return Returns next message, if not available, returns first message, if not available, returns null
+	 */
 	private static String getNextMessage() {
 		if(messages.isEmpty()) return null;
 		
@@ -47,6 +51,12 @@ public final class Announcer {
 		return messages.get(index);
 	}
 	
+	/**
+	 * 
+	 * @param message Message with & color codes and <tags>
+	 * @param player
+	 * @return Returns parsed message, ready to minecraft
+	 */
 	private static String parseMessage(String message, Player player) {
 		message = message.replace("<playername>", player.getName());
 		message = ChatColor.translateAlternateColorCodes('&', message);

@@ -18,6 +18,22 @@ public class Utilities {
 		Bukkit.broadcastMessage(prefix + " " + message);
 	}
 
+	/**
+	 * Print Debug message to server console
+	 * @param message debug message
+	 */
+	public static void prindDebug(String message) {
+		if(debug) {
+			System.out.println(message);
+		}
+	}
+	
+	/**
+	 * Print Debug message and StackTrace to server console and 
+	 * Example usage: Utilities.prindDebug("", new Exception());
+	 * @param message debug message
+	 * @param e Exception
+	 */
 	public static void prindDebug(String message, Exception e) {
 		if(debug) {
 			StackTraceElement element = e.getStackTrace()[0];
