@@ -18,7 +18,8 @@ public class StaticFields {
 		StaticFields.plugin = plugin;
 		interval = ConfigHandler.loadInterval();
 		toggle = ConfigHandler.loadToggle();
-		fileMessages = new File(plugin.getDataFolder() + "\\messages.yml");
+		String path = plugin.getDataFolder() + "\\messages.yml";
+		fileMessages = new File(path);
 		configMessages = YamlConfiguration.loadConfiguration(fileMessages);
 	}
 }
