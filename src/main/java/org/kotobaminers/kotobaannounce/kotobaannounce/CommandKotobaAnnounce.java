@@ -4,7 +4,7 @@ import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
 
 public class CommandKotobaAnnounce extends MyCommand {
-	public enum Commands {NONE, RELOAD, INTERVAL, TOGGLE, DEBUG;
+	public enum Commands {NONE, RELOAD, INTERVAL, TOGGLE, DEBUG, IGNORE;
 		public static Commands lookup(String name) {
 			try {
 				return Commands.valueOf(name.toUpperCase());
@@ -35,6 +35,9 @@ public class CommandKotobaAnnounce extends MyCommand {
 				return true;
 			case NONE:
 				break;
+			case IGNORE:
+				commandIgnore();
+				break;
 			default:
 				break;
 			}
@@ -43,8 +46,8 @@ public class CommandKotobaAnnounce extends MyCommand {
 	}
 	private void commandToggle(Player player) {
 		Utilities.prindDebug("", new Exception());
-		Config.reverseToggle();
-		Config.printToggle(player);
+		ConfigHandler.reverseToggle();
+		ConfigHandler.printToggle(player);
 	}
 	private void commandReload() {
 		Utilities.prindDebug("", new Exception());
@@ -59,6 +62,9 @@ public class CommandKotobaAnnounce extends MyCommand {
 			Utilities.prindDebug(e.toString(), new Exception());
 			return;
 		}
-		Config.saveInterval(interval);
+		ConfigHandler.saveInterval(interval);
+	}
+	private void commandIgnore() {
+
 	}
 }
