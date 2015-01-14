@@ -20,18 +20,16 @@ public final class Announcer {
         this.plugin = plugin;
     }
 
-
-	public static void announce() {
+	public static void broadcast() {
 		String message = getNextMessage();
-
-		//TODO: if(debug) Bukkit.getLogger().info(message);
+		String prefix = ""; // TODO load prefix from the config.yml or hold it as static?
 
 		if(message == null) return;
 		long checksum = getChecksum(message);
 
 	    for (Player player : Bukkit.getServer().getOnlinePlayers()) {
 	    	if(!hasIgnored(player, checksum))
-	    		player.sendMessage(parseMessage(message, player));
+	    		player.sendMessage(parseMessage(prefix + " " + message, player));
 	    }
 		return;
 	}
