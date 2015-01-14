@@ -18,19 +18,24 @@ public class KotobaAnnounce extends JavaPlugin {
 		}
 
 		saveConfig();
-		updateScheduler();
+
+		updateScheduler(Config.loadInterval().longValue() * 20L);
 
 		Announcer.reloadMessages(this);
 	}
 
-	private void updateScheduler() {
+	/**
+	 * Stopping old scheduler and restarting (with new settings)
+	 * @param period how long to wait between message
+	 */
+	private void updateScheduler(long period) {
 		if(scheduler != null) scheduler.cancel();
 		scheduler = getServer().getScheduler().runTaskTimer(this, new Runnable() {
             @Override
             public void run() {
             	Announcer.announce();
             }
-        }, 200L, 200L); // Waiting 10sec before first run, then run every 10sec
+        }, period, period); // Waiting 10sec before first run, then run every 10sec
 	}
 
 	@Override
