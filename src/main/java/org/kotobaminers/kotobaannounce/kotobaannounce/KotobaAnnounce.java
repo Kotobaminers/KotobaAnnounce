@@ -33,7 +33,7 @@ public class KotobaAnnounce extends JavaPlugin {
 		scheduler = getServer().getScheduler().runTaskTimer(this, new Runnable() {
             @Override
             public void run() {
-            	Announcer.announce();
+            	Announcer.broadcast();
             }
         }, period, period); // Waiting 10sec before first run, then run every 10sec
 	}
