@@ -121,6 +121,7 @@ public class KotobaAnnounceCommandExecutor implements CommandExecutor {
 			KotobaAnnounce.printInfo("Interval is se to " + interval);
 		sender.sendMessage("Interval is se to " + interval);
 
+		plugin.updateScheduler(interval * 20L);
 	}
 
 	private void commandAddAnnounce(CommandSender sender, String announce) {

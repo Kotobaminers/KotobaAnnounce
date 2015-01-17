@@ -49,7 +49,7 @@ public class KotobaAnnounce extends JavaPlugin {
 	 * @param period
 	 *            how long to wait between message
 	 */
-	private void updateScheduler(long period) {
+	void updateScheduler(long period) {
 		if(scheduler != null)
 			scheduler.cancel();
 		scheduler = getServer().getScheduler().runTaskTimer(this, new Runnable() {
@@ -96,8 +96,11 @@ public class KotobaAnnounce extends JavaPlugin {
 
 	/**
 	 * Print info message to server console and sender if any
-	 * @param sender command sender
-	 * @param message message to send
+	 * 
+	 * @param sender
+	 *            command sender
+	 * @param message
+	 *            message to send
 	 */
 	public static void printInfo(CommandSender sender, String message) {
 		log.info("[KotobaAnnounce] " + message);
