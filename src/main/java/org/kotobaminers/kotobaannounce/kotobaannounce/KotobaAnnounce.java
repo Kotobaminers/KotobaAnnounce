@@ -3,6 +3,8 @@ package org.kotobaminers.kotobaannounce.kotobaannounce;
 import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
 import org.kotobaminers.kotobaannounce.kotobaannounce.KotobaAnnounceCommandExecutor.Commands;
@@ -65,10 +67,6 @@ public class KotobaAnnounce extends JavaPlugin {
 	 */
 	public static void toggleDebug() {
 		debug = !debug;
-		if(debug)
-			printInfo("Debug enabled");
-		else
-			printInfo("Debug disabled");
 	}
 
 	/**
@@ -76,10 +74,6 @@ public class KotobaAnnounce extends JavaPlugin {
 	 */
 	public static void toggleEnabled() {
 		enabled = !enabled;
-		if(debug)
-			printInfo("Plugin enabled");
-		else
-			printInfo("Plugin disabled");
 	}
 
 	/**
@@ -98,6 +92,18 @@ public class KotobaAnnounce extends JavaPlugin {
 	 */
 	public static void printInfo(String message) {
 		log.info("[KotobaAnnounce] " + message);
+	}
+
+	/**
+	 * Print info message to server console and sender if any
+	 * @param sender command sender
+	 * @param message message to send
+	 */
+	public static void printInfo(CommandSender sender, String message) {
+		log.info("[KotobaAnnounce] " + message);
+		if(sender instanceof Player)
+			sender.sendMessage(message);
+
 	}
 
 	/**
@@ -131,4 +137,5 @@ public class KotobaAnnounce extends JavaPlugin {
 			log.info("[KotobaAnnounce Debug] " + message + " " + nameClass + " " + nameMethod + " " + line);
 		}
 	}
+
 }

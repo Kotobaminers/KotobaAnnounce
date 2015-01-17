@@ -136,6 +136,10 @@ public class KotobaAnnounceCommandExecutor implements CommandExecutor {
 
 	private void commandToggle(CommandSender sender) {
 		KotobaAnnounce.toggleEnabled();
+		if(KotobaAnnounce.debug)
+			KotobaAnnounce.printInfo(sender, "Plugin enabled");
+		else
+			KotobaAnnounce.printInfo(sender, "Plugin disabled");
 
 	}
 
@@ -152,6 +156,10 @@ public class KotobaAnnounceCommandExecutor implements CommandExecutor {
 
 	private void commandDebug(CommandSender sender) {
 		KotobaAnnounce.toggleDebug();
+		if(KotobaAnnounce.enabled)
+			KotobaAnnounce.printInfo(sender, "Plugin enabled");
+		else
+			KotobaAnnounce.printInfo(sender, "Plugin disabled");
 	}
 
 	/**
