@@ -52,10 +52,10 @@ public class KotobaAnnounceCommandExecutor implements CommandExecutor {
 				runKotobaAnnounceCommand(sender, command, args);
 				return true;
 			case NONE:
-				sender.sendMessage("Type \"/announce help\" to see announce commands1");
+				sender.sendMessage("Type \"/announce help\" to see announce commands");
 				break;
 			default:
-				sender.sendMessage("Type \"/announce help\" to see announce commands2");
+				sender.sendMessage("Type \"/announce help\" to see announce commands");
 				break;
 		}
 		return false;
@@ -92,10 +92,10 @@ public class KotobaAnnounceCommandExecutor implements CommandExecutor {
 				case DEL:
 					commandDelAnnounce(sender, args_new);
 				case NONE:
-					sender.sendMessage("Unknown command. Type \"/announce help\" to see subcommands3");
+					sender.sendMessage("Unknown command. Type \"/announce help\" to see subcommands");
 					break;
 				default:
-					sender.sendMessage("Unknown command. Type \"/announce help\" to see subcommands4");
+					sender.sendMessage("Unknown command. Type \"/announce help\" to see subcommands");
 					break;
 			}
 		}
