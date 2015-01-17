@@ -5,7 +5,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class CommandExecutorKotobaAnnounce implements CommandExecutor {
+public class KotobaAnnounceCommandExecutor implements CommandExecutor {
 	public enum Commands {NONE, ANNOUNCE, KOTOBAANNOUNCE;
 		public static Commands lookup(String name) {
 			try {
@@ -18,7 +18,7 @@ public class CommandExecutorKotobaAnnounce implements CommandExecutor {
 	
 
 	
-	public CommandExecutorKotobaAnnounce(KotobaAnnounce plugin) {
+	public KotobaAnnounceCommandExecutor(KotobaAnnounce plugin) {
 	}
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label,String[] args) {
