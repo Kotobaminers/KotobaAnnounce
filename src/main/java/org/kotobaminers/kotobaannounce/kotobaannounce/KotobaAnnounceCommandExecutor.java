@@ -25,7 +25,7 @@ public class KotobaAnnounceCommandExecutor implements CommandExecutor {
 	}
 
 	public enum KotobaAnnounceCommands {
-		NONE, RELOAD, INTERVAL, ADD, DEL, TOGGLE, HELP, DEBUG, ;
+		NONE, RELOAD, INTERVAL, ADD, DEL, LIST, TOGGLE, HELP, DEBUG, ;
 		public static KotobaAnnounceCommands lookup(String name) {
 			try {
 				return KotobaAnnounceCommands.valueOf(name.toUpperCase());
@@ -91,6 +91,10 @@ public class KotobaAnnounceCommandExecutor implements CommandExecutor {
 					return true;
 				case DEL:
 					commandDelAnnounce(sender, args_new);
+					return true;
+				case LIST:
+					commandListAnnounce(sender, args_new);
+					return true;
 				case NONE:
 					sender.sendMessage("Unknown command. Type \"/announce help\" to see subcommands");
 					break;
@@ -125,14 +129,23 @@ public class KotobaAnnounceCommandExecutor implements CommandExecutor {
 	}
 
 	private void commandAddAnnounce(CommandSender sender, String announce) {
-		//plugin.announcer.AddAnnounce(announce);
-		// TODO Auto-generated method stub
-		throw new NotImplementedException();
+		plugin.announcer.addAnnounce(announce);
 	}
 
-	private void commandDelAnnounce(CommandSender sender, String[] args_new) {
-		// TODO Auto-generated method stub
-		throw new NotImplementedException();
+	private void commandDelAnnounce(CommandSender sender, String[] args) {
+		if(args[0].matches("last")) {
+			plugin.announcer.delLastAnnounce();
+			return;
+		}
+		
+		if(plugin.announcer.delAnnounce(Integer.parseInt(args[0])-1))
+			sender.sendMessage("Message deleted");
+		else
+			sender.sendMessage("Failed to delete message");
+	}
+
+	private void commandListAnnounce(CommandSender sender, String[] args) {
+		plugin.announcer.listAnnounce(sender);
 	}
 
 	private void commandToggle(CommandSender sender) {
@@ -150,6 +163,7 @@ public class KotobaAnnounceCommandExecutor implements CommandExecutor {
 		sender.sendMessage("/announce toggle");
 		sender.sendMessage("/announce add <message>");
 		sender.sendMessage("/announce del <message_id>");
+		sender.sendMessage("/announce list");
 		sender.sendMessage("/announce help");
 		sender.sendMessage("/announce debug");
 
@@ -158,9 +172,9 @@ public class KotobaAnnounceCommandExecutor implements CommandExecutor {
 	private void commandDebug(CommandSender sender) {
 		KotobaAnnounce.toggleDebug();
 		if(KotobaAnnounce.enabled)
-			KotobaAnnounce.printInfo(sender, "Plugin enabled");
+			KotobaAnnounce.printInfo(sender, "Debug enabled");
 		else
-			KotobaAnnounce.printInfo(sender, "Plugin disabled");
+			KotobaAnnounce.printInfo(sender, "Debug disabled");
 	}
 
 	/**

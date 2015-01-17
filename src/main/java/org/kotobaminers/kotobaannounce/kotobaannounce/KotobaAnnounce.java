@@ -22,19 +22,15 @@ public class KotobaAnnounce extends JavaPlugin {
 	@Override
 	public void onEnable() {
 		config = null;
-		try {
-			config = new Config(this, "config.yml");
-		} catch(Exception e) {
-			printDebug("Loading config failed", e);
-			return;
-		}
+		config = null;
+		announcer = null;
+
+		reload();
 
 		for(Commands command : Commands.values()) {
 			this.getCommand(command.toString()).setExecutor(new KotobaAnnounceCommandExecutor(this));
 		}
 
-		announcer = new Announcer(this);
-		updateScheduler(config.getInt("interval", 100) * 20L);
 	}
 
 	@Override
@@ -80,7 +76,15 @@ public class KotobaAnnounce extends JavaPlugin {
 	 * Reload plugin
 	 */
 	public void reload() {
-		// TODO Auto-generated method stub
+		try {
+			config = new Config(this, "config.yml");
+		} catch(Exception e) {
+			printDebug("Loading config failed", e);
+			return;
+		}
+
+		announcer = new Announcer(this);
+		updateScheduler(config.getInt("interval", 100) * 20L);
 
 	}
 

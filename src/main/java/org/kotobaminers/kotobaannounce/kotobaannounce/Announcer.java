@@ -6,6 +6,7 @@ import java.util.zip.Checksum;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class Announcer {
@@ -23,6 +24,7 @@ public class Announcer {
 		if(!KotobaAnnounce.enabled)
 			return;
 		String message = getNextMessage();
+		KotobaAnnounce.printDebug("#" + (Announcer.index+1) + ": " + message);
 		String prefix = ""; // TODO load prefix from the config.yml or hold it
 		                    // as static?
 
@@ -32,7 +34,7 @@ public class Announcer {
 
 		for(Player player : Bukkit.getServer().getOnlinePlayers()) {
 			if(!hasIgnored(player, checksum))
-				player.sendMessage(parseMessage(prefix + " " + message, player));
+				player.sendMessage(parseMessage(prefix + message, player));
 		}
 		return;
 	}
@@ -97,7 +99,7 @@ public class Announcer {
 		}
 	}
 
-	public void AddAnnounce(String announce) {
+	public void addAnnounce(String announce) {
 		Config messagesConfig = null;
 		try {
 			messagesConfig = new Config(plugin, "messages.yml");
@@ -105,9 +107,47 @@ public class Announcer {
 			KotobaAnnounce.printDebug("Somethin went wrong whne loading messages. Disabling plugin", e);
 			KotobaAnnounce.enabled = false;
 		}
-		messagesConfig.getStringList("messages").add(announce);
+		messages = messagesConfig.getStringList("messages");
 		messages.add(announce);
+		messagesConfig.set("messages", messages);
 		messagesConfig.saveConfig();
 	}
 
+	public boolean delLastAnnounce() {
+		boolean returnvalue = delAnnounce(Announcer.index);
+		if(returnvalue && Announcer.index > 0)
+			Announcer.index--;
+		return returnvalue;
+	}
+
+	public boolean delAnnounce(int id) {
+
+		KotobaAnnounce.printDebug("" + messages.size() + " <= " + id);
+		if(messages.size() < id)
+			return false;
+		if(0 > id)
+			return false;
+
+		Config messagesConfig = null;
+		try {
+			messagesConfig = new Config(plugin, "messages.yml");
+		} catch(Exception e) {
+			KotobaAnnounce.printDebug("Somethin went wrong whne loading messages. Disabling plugin", e);
+			KotobaAnnounce.enabled = false;
+		}
+		messages = messagesConfig.getStringList("messages");
+		messages.remove(id);
+		messagesConfig.set("messages", messages);
+		return messagesConfig.saveConfig();
+	}
+
+	public void listAnnounce(CommandSender sender) {
+		int i = 1;
+		if(messages.size() == 0) sender.sendMessage("No announces. Add some /announce add message_here");
+		for(String s : messages) {
+			sender.sendMessage("#" + i + ": " + s);
+			i++;
+		}
+
+	}
 }
