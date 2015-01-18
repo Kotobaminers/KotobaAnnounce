@@ -40,8 +40,10 @@ public class KotobaAnnounceCommandExecutor implements CommandExecutor {
 		Player player = null;
 		if(sender instanceof Player) {
 			player = (Player) sender;
-			if(player.isOp() == false)
+			if(player.isOp() == false) {
+				sender.sendMessage("Sorry, you don't have permission to run this command");
 				return false; // Failing if not OP
+			}
 		}
 
 		Commands commands = Commands.lookup(label);
@@ -63,7 +65,6 @@ public class KotobaAnnounceCommandExecutor implements CommandExecutor {
 
 	public boolean runKotobaAnnounceCommand(CommandSender sender, Command command, String[] args) {
 		KotobaAnnounce.printDebug(command.toString(), new Exception());
-		if(0 < args.length) {
 			KotobaAnnounceCommands commands = KotobaAnnounceCommands.lookup(args[0]);
 			int lenght = args.length - 1;
 			String[] args_new = new String[lenght];
@@ -102,7 +103,6 @@ public class KotobaAnnounceCommandExecutor implements CommandExecutor {
 					sender.sendMessage("Unknown command. Type \"/announce help\" to see subcommands");
 					break;
 			}
-		}
 		return false;
 	}
 

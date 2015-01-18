@@ -74,7 +74,7 @@ public class Announcer {
 		// TODO: check has player ignored message or disabled all messages
 		// player.getUniqueId().toString()
 		// Long.toString(checksum)
-		System.out.println("hasIgnored( " + player.getUniqueId().toString() + ", " + Long.toString(checksum) + " )");
+		KotobaAnnounce.printDebug("hasIgnored( " + player.getUniqueId().toString() + ", " + Long.toString(checksum) + " )");
 		return false;
 	}
 
