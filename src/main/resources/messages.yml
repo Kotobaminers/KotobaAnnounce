@@ -1,5 +1,5 @@
-
 messages:
-- 'This is first &4test &fmessage for <playername>'
-- 'This is second test message'
-  
+- 'This is first &4example &fmessage for <playername>'
+- '&2S&3o &4m&5a&6n&7y &8c&9o&al&bo&cr&ds'
+- 'こんにちは 、<playername>さん, you can study japanese in minecraft at http://www.kotobaminers.org'
+- 'use /kotobaannounce to edit these messages'
