@@ -121,12 +121,11 @@ public class Announcer {
 	}
 
 	public boolean delAnnounce(int id) {
-
-		KotobaAnnounce.printDebug("" + messages.size() + " <= " + id);
-		if(messages.size() < id)
+		KotobaAnnounce.printDebug("size: " + messages.size() + " id: " + id);
+		if(messages.size()-1 < id || 0 > id) {
+			KotobaAnnounce.printInfo("Cannot delete message #" + id + ", because only " + messages.size() + " messages saved");
 			return false;
-		if(0 > id)
-			return false;
+		}
 
 		Config messagesConfig = null;
 		try {
