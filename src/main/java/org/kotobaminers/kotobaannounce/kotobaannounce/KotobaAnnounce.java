@@ -9,6 +9,12 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
 import org.kotobaminers.kotobaannounce.kotobaannounce.KotobaAnnounceCommandExecutor.Commands;
 
+/**
+ * Announce plugin for minecraft
+ * 
+ * @author Thasan, Kai_f
+ *
+ */
 public class KotobaAnnounce extends JavaPlugin {
 	private static BukkitTask scheduler = null;
 	static boolean enabled = true;

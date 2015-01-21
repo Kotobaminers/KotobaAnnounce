@@ -6,6 +6,11 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+/**
+ * 
+ * @author Kai_f, Thasan
+ *
+ */
 public class KotobaAnnounceCommandExecutor implements CommandExecutor {
 	private KotobaAnnounce plugin;
 
@@ -65,44 +70,44 @@ public class KotobaAnnounceCommandExecutor implements CommandExecutor {
 
 	public boolean runKotobaAnnounceCommand(CommandSender sender, Command command, String[] args) {
 		KotobaAnnounce.printDebug(command.toString(), new Exception());
-			KotobaAnnounceCommands commands = KotobaAnnounceCommands.lookup(args[0]);
-			int lenght = args.length - 1;
-			String[] args_new = new String[lenght];
-			System.arraycopy(args, 1, args_new, 0, lenght);
-			switch(commands) {
-				case INTERVAL:
-					if(1 < args.length) {
-						commandInterval(sender, args_new[0]);
-						return true;
-					}
-				case RELOAD:
-					commandReload();
+		KotobaAnnounceCommands commands = KotobaAnnounceCommands.lookup(args[0]);
+		int lenght = args.length - 1;
+		String[] args_new = new String[lenght];
+		System.arraycopy(args, 1, args_new, 0, lenght);
+		switch(commands) {
+			case INTERVAL:
+				if(1 < args.length) {
+					commandInterval(sender, args_new[0]);
 					return true;
-				case TOGGLE:
-					commandToggle(sender);
-					return true;
-				case HELP:
-					commandHelp(sender);
-					return true;
-				case DEBUG:
-					commandDebug(sender);
-					return true;
-				case ADD:
-					commandAddAnnounce(sender, implode(" ", args_new));
-					return true;
-				case DEL:
-					commandDelAnnounce(sender, args_new);
-					return true;
-				case LIST:
-					commandListAnnounce(sender, args_new);
-					return true;
-				case NONE:
-					sender.sendMessage("Unknown command. Type \"/announce help\" to see subcommands");
-					break;
-				default:
-					sender.sendMessage("Unknown command. Type \"/announce help\" to see subcommands");
-					break;
-			}
+				}
+			case RELOAD:
+				commandReload();
+				return true;
+			case TOGGLE:
+				commandToggle(sender);
+				return true;
+			case HELP:
+				commandHelp(sender);
+				return true;
+			case DEBUG:
+				commandDebug(sender);
+				return true;
+			case ADD:
+				commandAddAnnounce(sender, implode(" ", args_new));
+				return true;
+			case DEL:
+				commandDelAnnounce(sender, args_new);
+				return true;
+			case LIST:
+				commandListAnnounce(sender, args_new);
+				return true;
+			case NONE:
+				sender.sendMessage("Unknown command. Type \"/announce help\" to see subcommands");
+				break;
+			default:
+				sender.sendMessage("Unknown command. Type \"/announce help\" to see subcommands");
+				break;
+		}
 		return false;
 	}
 
@@ -137,8 +142,8 @@ public class KotobaAnnounceCommandExecutor implements CommandExecutor {
 			plugin.announcer.delLastAnnounce();
 			return;
 		}
-		
-		if(plugin.announcer.delAnnounce(Integer.parseInt(args[0])-1))
+
+		if(plugin.announcer.delAnnounce(Integer.parseInt(args[0]) - 1))
 			sender.sendMessage("Message deleted");
 		else
 			sender.sendMessage("Failed to delete message");

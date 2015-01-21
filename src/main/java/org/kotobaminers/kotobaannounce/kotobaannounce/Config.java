@@ -6,6 +6,12 @@ import java.io.IOException;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
 
+/**
+ * Handling configfiles automatcily
+ * 
+ * @author Thasan
+ *
+ */
 public class Config extends YamlConfiguration {
 	private static KotobaAnnounce plugin;
 	private String filename;
