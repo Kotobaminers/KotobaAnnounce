@@ -5,6 +5,21 @@
 	<artifactId>KotobaAnnounce</artifactId>
 	<version>GIT</version>
 
+	<issueManagement>
+		<system>GitHub Issues</system>
+		<url>https://github.com/Kotobaminers/KotobaAnnounce/issues</url>
+	</issueManagement>
+	<ciManagement>
+		<url>https://dev.koodaa.net/jenkins/</url>
+		<system>Jenkins</system>
+	</ciManagement>
+	<name>KotobaAnnounce</name>
+	<url>http://www.kotobaminers.org/plugins/KotobaAnnounce</url>
+	<scm>
+		<url>https://github.com/Kotobaminers/KotobaAnnounce</url>
+		<connection>scm:git:ssh://git@github.com:Kotobaminers/KotobaAnnounce.git</connection>
+	</scm>
+	
 	<build>
 		<finalName>${project.name}-${git.commit.id.describe-short}</finalName>
 		<plugins>
