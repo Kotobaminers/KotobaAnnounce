@@ -1,6 +1,9 @@
 name: KotobaAnnounce
 main: org.kotobaminers.kotobaannounce.kotobaannounce.KotobaAnnounce
 version: ${git.commit.id.describe}
+authors: [Thasan, kai_f]
+website: http://www.kotobaminers.org/plugins/KotobaAnnounce
+database: false
 commands:
   NONE:
   KOTOBAANNOUNCE:
