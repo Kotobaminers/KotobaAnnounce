@@ -69,6 +69,10 @@ public class KotobaAnnounceCommandExecutor implements CommandExecutor {
 
 	public boolean runKotobaAnnounceCommand(CommandSender sender, Command command, String[] args) {
 		KotobaAnnounce.printDebug(command.toString(), new Exception());
+		if(args.length == 0) {
+			sender.sendMessage("Unknown command. Type \"/announce help\" to see subcommands");
+			return false;
+		}
 		KotobaAnnounceCommands commands = KotobaAnnounceCommands.lookup(args[0]);
 		int lenght = args.length - 1;
 		String[] args_new = new String[lenght];
