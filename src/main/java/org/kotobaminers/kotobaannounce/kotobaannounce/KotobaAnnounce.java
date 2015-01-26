@@ -28,7 +28,6 @@ public class KotobaAnnounce extends JavaPlugin {
 	@Override
 	public void onEnable() {
 		config = null;
-		config = null;
 		announcer = null;
 
 		reload();

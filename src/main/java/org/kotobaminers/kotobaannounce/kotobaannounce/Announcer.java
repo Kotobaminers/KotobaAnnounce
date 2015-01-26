@@ -18,10 +18,11 @@ public class Announcer {
 	private KotobaAnnounce plugin;
 	private List<String> messages;
 	private static int index;
+	private static String format = "<message>";
 
 	public Announcer(KotobaAnnounce plugin) {
 		this.plugin = plugin;
-
+		format = plugin.config.getString("format");
 		reloadMessages();
 	}
 
@@ -33,8 +34,6 @@ public class Announcer {
 			return;
 		String message = getNextMessage();
 		KotobaAnnounce.printDebug("#" + (Announcer.index + 1) + ": " + message);
-		String prefix = ""; // TODO load prefix from the config.yml or hold it
-		                    // as static?
 
 		if(message == null)
 			return;
@@ -42,7 +41,7 @@ public class Announcer {
 
 		for(Player player : Bukkit.getServer().getOnlinePlayers()) {
 			if(!hasIgnored(player, checksum))
-				player.sendMessage(parseMessage(prefix + message, player));
+				player.sendMessage(parseMessage(message, player));
 		}
 		return;
 	}
@@ -75,8 +74,7 @@ public class Announcer {
 	 */
 	private static String parseMessage(String message, Player player) {
 		message = message.replace("<playername>", player.getName());
-		message = ChatColor.translateAlternateColorCodes('&', message);
-		return message;
+		return ChatColor.translateAlternateColorCodes('&', format.replace("<message>", message));
 	}
 
 	/**
