@@ -84,7 +84,7 @@ public class KotobaAnnounceCommandExecutor implements CommandExecutor {
 					return true;
 				}
 			case RELOAD:
-				commandReload();
+				commandReload(sender);
 				return true;
 			case TOGGLE:
 				commandToggle(sender);
@@ -114,9 +114,10 @@ public class KotobaAnnounceCommandExecutor implements CommandExecutor {
 		return false;
 	}
 
-	private void commandReload() {
+	private void commandReload(CommandSender sender) {
 		KotobaAnnounce.printDebug("", new Exception());
 		plugin.reload();
+		sender.sendMessage("Announces reloaded. Found " + plugin.announcer.countAnnounces() + " announces.");
 	}
 
 	private void commandInterval(CommandSender sender, String arg) {
@@ -130,7 +131,7 @@ public class KotobaAnnounceCommandExecutor implements CommandExecutor {
 		}
 		plugin.config.saveInterval(interval);
 		if(sender instanceof Player)
-			KotobaAnnounce.printInfo("Interval is se to " + interval);
+			KotobaAnnounce.printInfo("Interval is set to " + interval);
 		sender.sendMessage("Interval is se to " + interval);
 
 		plugin.updateScheduler(interval * 20L);

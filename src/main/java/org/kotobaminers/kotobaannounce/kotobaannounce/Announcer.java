@@ -199,6 +199,9 @@ public class Announcer {
 			sender.sendMessage("#" + i + ": " + s);
 			i++;
 		}
-
+	}
+	
+	public int countAnnounces() {
+		return messages.size();
 	}
 }
