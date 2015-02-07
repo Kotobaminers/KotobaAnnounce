@@ -5,7 +5,9 @@ authors: [Thasan, kai_f]
 website: http://www.kotobaminers.org/plugins/KotobaAnnounce
 database: false
 commands:
-  NONE:
-  KOTOBAANNOUNCE:
-  ANNOUNCE:
-  KA:
+  kotobaannounce:
+    description: Control announcements
+    aliases: [announce, ka]
+    permission: kotobaannounce.
+    usage: Type "/announce help" to see announce commands
+

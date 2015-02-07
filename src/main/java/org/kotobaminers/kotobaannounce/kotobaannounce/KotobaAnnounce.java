@@ -33,7 +33,9 @@ public class KotobaAnnounce extends JavaPlugin {
 		reload();
 
 		for(Commands command : Commands.values()) {
+			if(command == Commands.NONE) continue;
 			this.getCommand(command.toString()).setExecutor(new KotobaAnnounceCommandExecutor(this));
+			this.getCommand(command.toString()).setTabCompleter(new KotobaAnnouncethisTabCompleter(this));
 		}
 
 	}
