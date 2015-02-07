@@ -167,12 +167,12 @@ public class KotobaAnnounceCommandExecutor implements CommandExecutor {
 	}
 
 	private void commandHelp(CommandSender sender) {
+		sender.sendMessage("/announce add <message>");
+		sender.sendMessage("/announce del <message_id|last>");
+		sender.sendMessage("/announce list");
 		sender.sendMessage("/announce interval <seconds>");
 		sender.sendMessage("/announce reload");
 		sender.sendMessage("/announce toggle");
-		sender.sendMessage("/announce add <message>");
-		sender.sendMessage("/announce del <message_id>");
-		sender.sendMessage("/announce list");
 		sender.sendMessage("/announce help");
 		sender.sendMessage("/announce debug");
 
