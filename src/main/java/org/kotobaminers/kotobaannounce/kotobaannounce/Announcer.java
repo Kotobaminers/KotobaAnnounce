@@ -131,19 +131,22 @@ public class Announcer {
 	 * 
 	 * @param announce
 	 *            message to add
+	 * @return return true if added successfully
 	 */
-	public void addAnnounce(String announce) {
+	public boolean addAnnounce(String announce) {
 		Config messagesConfig = null;
 		try {
 			messagesConfig = new Config(plugin, "messages.yml");
 		} catch(Exception e) {
 			KotobaAnnounce.printDebug("Somethin went wrong whne loading messages. Disabling plugin", e);
 			KotobaAnnounce.enabled = false;
+			return false;
 		}
 		messages = messagesConfig.getStringList("messages");
 		messages.add(announce);
 		messagesConfig.set("messages", messages);
 		messagesConfig.saveConfig();
+		return true;
 	}
 
 	/**
@@ -200,7 +203,7 @@ public class Announcer {
 			i++;
 		}
 	}
-	
+
 	public int countAnnounces() {
 		return messages.size();
 	}

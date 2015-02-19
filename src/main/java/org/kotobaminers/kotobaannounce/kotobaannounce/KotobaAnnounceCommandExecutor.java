@@ -76,6 +76,10 @@ public class KotobaAnnounceCommandExecutor implements CommandExecutor {
 						commandInterval(sender, args_new[0]);
 						return true;
 					}
+					else {
+						commandInterval(sender, null);
+						return true;
+					}
 				case RELOAD:
 					commandReload(sender);
 					return true;
@@ -115,6 +119,11 @@ public class KotobaAnnounceCommandExecutor implements CommandExecutor {
 	private void commandInterval(CommandSender sender, String arg) {
 		KotobaAnnounce.printDebug("", new Exception());
 		Integer interval = 100;
+		if(arg == null) {
+			sender.sendMessage("Announce interval: " + plugin.config.getInt("interval", interval));
+			return;
+		}
+		
 		try {
 			interval = Integer.valueOf(arg);
 		} catch(NumberFormatException e) {
@@ -130,7 +139,12 @@ public class KotobaAnnounceCommandExecutor implements CommandExecutor {
 	}
 
 	private void commandAddAnnounce(CommandSender sender, String announce) {
-		plugin.announcer.addAnnounce(announce);
+		if(plugin.announcer.addAnnounce(announce)) {
+			sender.sendMessage("Announce added");
+		}
+		else {
+			sender.sendMessage("Oops... something went broken. Sorry =(");
+		}
 	}
 
 	private void commandDelAnnounce(CommandSender sender, String[] args) {
@@ -140,7 +154,7 @@ public class KotobaAnnounceCommandExecutor implements CommandExecutor {
 		}
 
 		if(plugin.announcer.delAnnounce(Integer.parseInt(args[0]) - 1))
-			sender.sendMessage("Message deleted");
+			sender.sendMessage("Announce deleted");
 		else
 			sender.sendMessage("Failed to delete message");
 	}

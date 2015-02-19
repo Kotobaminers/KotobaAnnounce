@@ -9,10 +9,7 @@ import org.bukkit.command.TabCompleter;
 
 public class KotobaAnnouncethisTabCompleter implements TabCompleter {
 
-	private KotobaAnnounce plugin;
-
 	public KotobaAnnouncethisTabCompleter(KotobaAnnounce kotobaAnnounce) {
-		this.plugin = plugin;
 	}
 
 	@Override
